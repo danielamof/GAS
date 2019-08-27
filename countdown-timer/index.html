@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown timer</title>
+    <style>
+    <?!= getSourceFile('css'); ?>
+    </style>
+    <script>
+    function Counter(display, callback) {
+
+    this.interval;
+    this.duration = 0;
+    this.display = display;
+    this.state = 0; // 0 stopped 1 playing 2 paused
+    this.callback = callback;
+
+}
+
+Counter.prototype.renderTimeRemaining = function() {
+    let timeRemaining = this.calcTime();
+    this.display.innerText = timeRemaining.hours + ":" + timeRemaining.minutes + ":" + timeRemaining.seconds;
+}
+
+Counter.prototype.calcTime = function() {
+    let timeRemaining, hours, minutes, seconds;
+    hours = parseInt(this.duration / 3600, 10);
+    timeRemaining = this.duration % 3600;
+    minutes = parseInt(timeRemaining / 60, 10);
+    timeRemaining = timeRemaining % 60;
+    seconds = parseInt(timeRemaining, 10);
+
+    hours = hours < 10 ? "0" + hours : hours;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    return {hours:hours, minutes:minutes, seconds:seconds};
+}
+
+Counter.prototype.tic = function () {
+    if (--this.duration < 0) {
+        this.resetTimer();
+        this.callback();
+    }
+}
+
+Counter.prototype.resumeTimer = function () {
+    if (this.duration <= 0)
+        return;
+    var counter = this;
+    if (undefined !== this.interval)
+        clearInterval(this.interval);
+    this.state = 1;
+    counter.tic();
+    counter.renderTimeRemaining();
+    this.interval = setInterval(function () {
+        counter.tic();
+        counter.renderTimeRemaining();
+    }, 1000);
+}
+
+Counter.prototype.startTimer = function (duration) {
+    if (undefined !== duration && 0 === this.state) {
+        this.duration = duration;
+    }
+    if (1 !== this.state) {
+        this.renderTimeRemaining();
+        this.resumeTimer();
+    }
+}
+
+Counter.prototype.resetTimer = function(duration) {
+    clearInterval(this.interval);
+    this.state = 0;
+    this.interval = undefined;
+    this.duration = (undefined !== duration)?duration:0;
+    this.renderTimeRemaining();
+}
+
+Counter.prototype.pauseTimer = function() {
+    clearInterval(this.interval);
+    this.state = 2;
+}
+
+Counter.prototype.toggleTimer = function() {
+    switch (this.state) {
+        case 1:
+            this.pauseTimer();
+            break;
+        case 2:
+            this.resumeTimer();
+            break;
+    }
+}
+
+Counter.prototype.getState = function() {
+    return this.state;
+}
+
+Counter.prototype.setDuration = function(duration) {
+    this.duration = duration;
+}
+
+Counter.prototype.toSeconds = function(format) {
+    let regx = /([0-9]*)(:)([0-9]*)(:)([0-9]*)/g;
+    let matches = regx.exec(format);
+    return parseInt(matches[1]*3600) + parseInt(matches[3]*60) + parseInt(matches[5]);
+}
+      const MAX_ALARM = 7;
+      let interval, count=MAX_ALARM, duration=0;
+      function loadSound() {
+        sound.src = document.querySelector('.sound-file').value;
+        sound.load();
+        sound.pause();
+        if (document.querySelector('.load')) {
+          document.querySelector('.load').innerHTML = 'Sound loaded';
+          document.querySelector('.load').classList.add("load-inactive");
+          document.querySelector('.load').classList.remove("load");
+        }
+      }
+      function playSound() {
+        playColors();
+        interval=setInterval(playColors, 1000);
+        sound.play();
+      }
+      function playColors() {
+        let o = document.querySelector('#container-counter');
+        if (count>0) {
+          (o.className==="black")?o.className='red-all':o.className='black';
+          count--;
+        } else {
+          clearInterval(interval);
+          count = MAX_ALARM;
+          o.className='black';
+          updateCounter();
+        }
+      }
+      function counterStart() {
+        counter.startTimer();
+      }
+      function counterPause() {
+        counter.pauseTimer();
+      }
+      function counterReset() {
+        duration=0;
+        count=0;
+        audio.pause();
+        audio.currenTime=0;
+        counter.resetTimer();
+      }
+      function updateCounter(e) {
+        if (counter.getState())
+          return;
+        let hours, minutes, seconds;
+        console.log(e.keyCode);
+        if (e !== undefined) {
+          if (isNaN(e.key) || 32 === e.keyCode) {
+            // check backspace
+            if (8 === e.keyCode) {
+              duration = "0"+parseInt(duration/10);
+            }
+          } else {
+            duration += e.key;
+          }
+        }
+        if (!duration.substr)
+          return;
+        seconds = duration.substr(-2,2).padStart(2,"0");
+        if (duration.length>3)
+          minutes = duration.substr(-4,2).padStart(2,"0");
+        else
+          minutes = "00";
+        if (duration.length>5)
+          hours = duration.substr(-6,2).padStart(2,"0");
+        else
+          hours = "00";
+        document.querySelector('#container-counter').innerText = hours+":"+minutes+":"+seconds;
+        counter.setDuration(counter.toSeconds(document.querySelector('#container-counter').innerText));
+      }
+      document.addEventListener('keydown', updateCounter);
+      function enableLoadButton(e) {
+        document.querySelector('.load-inactive').innerHTML = 'Load sound';
+        document.querySelector('.load-inactive').classList.add("load");
+        document.querySelector('.load-inactive').classList.remove("load-inactive");
+      }
+      function digitPressKey(key) {
+        document.dispatchEvent(new KeyboardEvent('keydown',{'key':key}));
+      }
+      function digitPressKeyCode(key) {
+        document.dispatchEvent(new KeyboardEvent('keydown',{'key':'Backspace','keyCode':key}));
+      }
+    </script>
+  </head>
+  <body onload="document.querySelector('.start').focus();loadSound();">
+    <header class="page-header">
+      <div class="page-bar">
+        <nav class="header-nav">
+          <ul>
+            <li class="app-name"><div>Countdown</div></li>
+          </ul>
+        </nav>
+        <div class="header-logo"><span></span></div>
+      </div>
+    </header>
+    <main class="page-main">
+        <div id="countdown-container">
+        <div><p>Use delete and number keys to input countdown timer.</p></div>
+          <div id="container">
+            <div id="container-counter" class="black" onclick="">
+                00:00:00
+            </div>
+            <div class="digits">
+              <button class="num" onclick="digitPressKey(0);">0</button>
+              <button class="num" onclick="digitPressKey(1);">1</button>
+              <button class="num" onclick="digitPressKey(2);">2</button>
+              <button class="num" onclick="digitPressKey(3);">3</button>
+              <button class="num" onclick="digitPressKey(4);">4</button>
+              <button class="num" onclick="digitPressKey(5);">5</button>
+              <button class="num" onclick="digitPressKey(6);">6</button>
+              <button class="num" onclick="digitPressKey(7);">7</button>
+              <button class="num" onclick="digitPressKey(8);">8</button>
+              <button class="num" onclick="digitPressKey(9);">9</button>
+              <button class="num" onclick="digitPressKeyCode(8);">Del</button>
+            </div>
+            <div class="ring-sound">
+              <p>Paste the URL of the sound to play:</p>
+              <input type="text" class="sound-file" value="http://soundbible.com/grab.php?id=1426&type=wav" onpaste="enableLoadButton();" onkeypress="return false;" />
+            </div>
+            <div class="actions">
+              <button class="start" onclick="counterStart();">Start</button>
+              <button class="pause" onclick="counterPause();">Pause</button>
+              <button class="reset" onclick="counterReset();">Reset</button>
+              <button class="load-inactive" onclick="loadSound();">Sound loaded</button>
+            </div>
+          </div>
+          <div class="disclaimer">
+          <p>Este script está en código abierto <a href="https://github.com/danielamof/GAS/tree/master/countdown-timer" href="_blank">aquí</a>. El desarrollo de este script webapp no recolecta ningún tipo de dato ni genera ninguna cookie. El script está desarrollado en el editor de Google Apps Script, por este motivo Google puede generar alguna cookie o recolectar datos, en cuyo caso se estará sujeto a los <a href="https://policies.google.com/terms" target="_blank">términos de uso</a> y <a href="https://policies.google.com/privacy" target="_blank">políticas de privacidad</a> de Google.</p>
+          </div>
+        </div>
+        <audio id="audio" src="" autoplay="false"></audio>
+        <script>
+          let counter = new Counter(document.querySelector('#container-counter'), playSound);
+          let sound = document.getElementById("audio");
+        </script>
+      </main>
+  </body>
+</html>
