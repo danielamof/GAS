@@ -10,10 +10,10 @@
 		"description": "Muestra un Shows a configurable time&sound countdown timer."
 	}]
 },{
-	"title": "Socrative Analytics",
+	"title": "Socrative.com Analytics",
 	"description": "Shows a dashboard generated with Socrative.com results.",
 	"srcImg": "https://drive.google.com/uc?id=11W210kHunyrMthKlz0Z8augPyOaprMm5&export=download",
-	"srcCode": "https://github.com/danielamof/GAS/tree/master/socrative-analytics",
+	"srcCode": "https://github.com/danielamof/GAS/tree/master/socrative.com-analytics",
 	"srcDemo": "https://script.google.com/macros/s/AKfycbx2cPlEZIQ_0JxCcYqwBU-v-PoK2Ae3Yb2QvW--1uKXkXSui8cd/exec",
 	"lang": [{
 		"locale": "es",
