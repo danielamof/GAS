@@ -11,12 +11,12 @@
 	}]
 },{
 	"title": "Socrative.com Analytics",
-	"description": "Shows a dashboard generated with Socrative.com results. <a href='https://www.fundacionbias.org/'>Contact Fundación Bias to activate <b>Socrative.com Analytics</b> at your school.</a>",
+	"description": "Shows a dashboard generated with Socrative.com results. Contact <a href='https://www.fundacionbias.org/'>Fundación Bias</a> to activate <b>Socrative.com Analytics</b> at your school.",
 	"srcImg": "https://drive.google.com/uc?id=11W210kHunyrMthKlz0Z8augPyOaprMm5&export=download",
 	"srcDemo": "https://script.google.com/macros/s/AKfycbx2cPlEZIQ_0JxCcYqwBU-v-PoK2Ae3Yb2QvW--1uKXkXSui8cd/exec",
 	"lang": [{
 		"locale": "es",
 		"title": "Analíticas Socrative.com",
-		"description": "Muestra un panel de control generado con resultados de Socrative.com. <a href='https://www.fundacionbias.org/'>Contacta con Fundación Bias para activar <b>Socrative.com Analytics</b> en tu centro educativo.</a>"
+		"description": "Muestra un panel de control generado con resultados de Socrative.com. Contacta con <a href='https://www.fundacionbias.org/'>Fundación Bias</a> para activar <b>Socrative.com Analytics</b> en tu centro educativo.</a>"
 	}]
 }]
