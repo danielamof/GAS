@@ -5,8 +5,19 @@
 	"srcCode": "https://github.com/danielamof/GAS/tree/master/countdown-timer",
 	"srcDemo": "https://script.google.com/macros/s/AKfycbx2cPlEZIQ_0JxCcYqwBU-v-PoK2Ae3Yb2QvW--1uKXkXSui8cd/exec",
 	"lang": [{
-		"locale": "ES-ES",
-		"title": "Muestra un reloj de cuenta atrás con tiempo y sonido configurable.",
+		"locale": "es",
+		"title": "Temporizador de cuenta atrás",
 		"description": "Muestra un Shows a configurable time&sound countdown timer."
+	}]
+},{
+	"title": "Socrative Analytics",
+	"description": "Shows a dashboard generated with Socrative.com results.",
+	"srcImg": "https://drive.google.com/uc?id=11W210kHunyrMthKlz0Z8augPyOaprMm5&export=download",
+	"srcCode": "https://github.com/danielamof/GAS/tree/master/socrative-analytics",
+	"srcDemo": "https://script.google.com/macros/s/AKfycbx2cPlEZIQ_0JxCcYqwBU-v-PoK2Ae3Yb2QvW--1uKXkXSui8cd/exec",
+	"lang": [{
+		"locale": "es",
+		"title": "Analíticas Socrative.com",
+		"description": "Muestra un panel de control generado con resultados de Socrative.com."
 	}]
 }]
