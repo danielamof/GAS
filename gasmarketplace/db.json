@@ -1,0 +1,12 @@
+[{
+	"title": "Countdown timer",
+	"description": "Shows a time&sound configurable countdown timer.",
+	"srcImg": "https://drive.google.com/uc?id=11W210kHunyrMthKlz0Z8augPyOaprMm5&export=download",
+	"srcCode": "https://github.com/danielamof/GAS/tree/master/countdown-timer",
+	"srcDemo": "https://script.google.com/macros/s/AKfycbx2cPlEZIQ_0JxCcYqwBU-v-PoK2Ae3Yb2QvW--1uKXkXSui8cd/exec",
+	"lang": [{
+		"locale": "ES-ES",
+		"title": "Muestra un reloj de cuenta atrás con tiempo y sonido configurable.",
+		"description": "Muestra un Shows a configurable time&sound countdown timer."
+	}]
+}]
