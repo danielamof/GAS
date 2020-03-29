@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="utf8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown timer</title>
     <style>
@@ -234,11 +234,10 @@ Counter.prototype.toSeconds = function(format) {
             </div>
           </div>
           <div class="disclaimer">
-          <p>Este script está en código abierto <a href="https://github.com/danielamof/GAS/tree/master/countdown-timer" href="_blank">aquí</a>. El desarrollo de este script webapp no recolecta ningún tipo de dato ni genera ninguna cookie. El script está desarrollado en el editor de Google Apps Script, por este motivo Google puede generar alguna cookie o recolectar datos, en cuyo caso se estará sujeto a los <a href="https://policies.google.com/terms" target="_blank">términos de uso</a> y <a href="https://policies.google.com/privacy" target="_blank">políticas de privacidad</a> de Google.</p>
-            <p>dando soporte a <a href="https://www.fundacionbias.org/" target="_blank">Fundación Bias</a></p>
+          <p>Este script está en código abierto <a href="https://github.com/danielamof/GAS/tree/master/countdown-timer" target="_blank">aquí</a>. El desarrollo de este script webapp no recolecta ningún tipo de dato ni genera ninguna cookie. El script está desarrollado en el editor de Google Apps Script, por este motivo Google puede generar alguna cookie o recolectar datos, en cuyo caso se estará sujeto a los <a href="https://policies.google.com/terms" target="_blank">términos de uso</a> y <a href="https://policies.google.com/privacy" target="_blank">políticas de privacidad</a> de Google.</p>
           </div>
         </div>
-        <audio id="audio" src="" autoplay="false"></audio>
+        <audio id="audio" src="http://soundbible.com/grab.php?id=1426&type=wav"></audio>
         <script>
           let counter = new Counter(document.querySelector('#container-counter'), playSound);
           let sound = document.getElementById("audio");
